@@ -1,13 +1,17 @@
-import { Suspense } from "react";
 import { client } from "@/lib/graphql/client";
 import getOriginalVideo from "@/lib/graphql/query/getOriginalVideo";
 import getVideoComments from "@/lib/graphql/query/getVideoComments";
 import VideoComments from "@/components/VideoComments";
 
-export default async function VideoPage({ params }: {
-  params: { videoId: string };
-}) {
-  const { videoId } = params;
+type Props = {
+  params: Promise<{
+    videoId: string;
+  }>;
+};
+
+export default async function VideoPage({ params }: Props) {
+  // ✅ FIX: await params
+  const { videoId } = await params;
 
   const videoData = await client.request(getOriginalVideo, { id: videoId });
 
@@ -34,12 +38,10 @@ export default async function VideoPage({ params }: {
         </section>
 
         <aside className="border-l pl-6">
-          <Suspense fallback={<p>Loading comments…</p>}>
-            <VideoComments
-              videoId={videoId}
-              initialData={commentsData.videoComments}
-            />
-          </Suspense>
+          <VideoComments
+            videoId={videoId}
+            initialData={commentsData.videoComments}
+          />
         </aside>
       </div>
     </main>

@@ -16,6 +16,7 @@ export default function VideoThumbnail({ id, title, thumbnail }: Props) {
   alt={title}
   width={320}
   height={180}
+  priority
   className="rounded-lg object-cover w-full"
 />
 </div>
