@@ -27,32 +27,35 @@ Tailwind CSS
 
 next/font (Geist font)
 
+## 📁 Project Structure
+
+```text
 app/
-├─ layout.tsx                 # Global layout (fonts, styles)
-├─ page.tsx                   # Top page
+├─ layout.tsx                # Global layout (fonts, providers, styles)
+├─ page.tsx                  # Top page (home screen)
 ├─ category/
 │  └─ [categoryId]/
-│     └─ page.tsx             # Category detail page
+│     └─ page.tsx            # Category detail page
 ├─ video/
 │  └─ [videoId]/
-│     └─ page.tsx             # Movie detail page
-│
+│     └─ page.tsx            # Video detail page
+├─ providers.tsx             # App-wide providers (Apollo)
+
 components/
-├─ VideoThumbnail.tsx         # Movie thumbnail UI
-├─ VideoComments.tsx          # Comment list (with pagination support)
-│
+├─ VideoThumbnail.tsx        # Movie thumbnail card
+├─ VideoComments.tsx         # Comment list
+
 lib/
 ├─ graphql/
-│  ├─ client.ts               # GraphQL client
+│  ├─ client.ts              # GraphQL client (graphql-request)
 │  └─ query/
 │     ├─ getHomeScreens.ts
 │     ├─ getCategory.ts
 │     ├─ getOriginalVideo.ts
 │     └─ getVideoComments.ts
-│
-public/
-├─ avatar-placeholder.svg     # Fallback avatar image
 
+public/
+├─ avatar-placeholder.svg    # Fallback avatar image
 
 🖥 Pages Overview
 1️⃣ Top Page (/)
