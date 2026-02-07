@@ -1,46 +1,44 @@
 import { Suspense } from "react";
 import { client } from "@/lib/graphql/client";
 import getOriginalVideo from "@/lib/graphql/query/getOriginalVideo";
+import getVideoComments from "@/lib/graphql/query/getVideoComments";
 import VideoComments from "@/components/VideoComments";
 
-type Props = {
-  params: Promise<{
-    videoId: string;
-  }>;
-};
+export default async function VideoPage({ params }: {
+  params: { videoId: string };
+}) {
+  const { videoId } = params;
 
-export default async function VideoPage({ params }: Props) {
-  // ✅ FIX 1: await params
-  const { videoId } = await params;
+  const videoData = await client.request(getOriginalVideo, { id: videoId });
 
-  const data = await client.request(getOriginalVideo, {
+  const commentsData = await client.request(getVideoComments, {
     id: videoId,
+    first: 5,
   });
-
-  const video = data.originalVideo;
 
   return (
     <main className="p-8 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Left: Movie info */}
         <section className="md:col-span-2">
           <h1 className="text-2xl font-bold mb-4">
-            {video.title}
+            {videoData.originalVideo.title}
           </h1>
 
           <p className="text-gray-700 mb-6">
-            {video.description}
+            {videoData.originalVideo.description}
           </p>
 
           <p className="text-sm">
-            ❤️ {video.likeNum}
+            ❤️ {videoData.originalVideo.likeNum}
           </p>
         </section>
 
-        {/* Right: Comments */}
         <aside className="border-l pl-6">
-          <Suspense fallback={<p className="text-gray-400">Loading comments…</p>}>
-            <VideoComments videoId={videoId} />
+          <Suspense fallback={<p>Loading comments…</p>}>
+            <VideoComments
+              videoId={videoId}
+              initialData={commentsData.videoComments}
+            />
           </Suspense>
         </aside>
       </div>
