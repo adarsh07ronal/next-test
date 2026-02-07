@@ -12,6 +12,10 @@ A movie detail page with comments and pagination
 
 The implementation focuses on correctness, clarity, maintainability, and extensibility, aligned with the assignment requirements.
 
+Demo Video
+https://youtu.be/BCL35zcQHvE
+
+
 🚀 Tech Stack
 
 Next.js (App Router)
