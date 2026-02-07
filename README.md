@@ -31,11 +31,14 @@ Tailwind CSS
 next/font (Geist font)
 
 
-📁 Project Structure
+## 📁 Project Structure
+
+```text
 app/
 ├─ layout.tsx                # Global layout (fonts, styles, providers)
 ├─ page.tsx                  # Top page (home screen)
 ├─ loading.tsx               # Route-level loading UI (home)
+├─ providers.tsx             # App-wide providers
 ├─ category/
 │  └─ [categoryId]/
 │     ├─ page.tsx            # Category detail page
@@ -44,14 +47,11 @@ app/
 │  └─ [videoId]/
 │     ├─ page.tsx            # Video detail page
 │     └─ loading.tsx         # Video skeleton UI
-├─ providers.tsx             # App-wide providers
-
 components/
 ├─ VideoThumbnail.tsx        # Movie thumbnail card
 ├─ VideoComments.tsx         # Comment list (client component)
 ├─ SkeletonThumbnail.tsx     # Thumbnail skeleton
 ├─ CommentsSkeleton.tsx      # Comment skeleton
-
 lib/
 ├─ graphql/
 │  ├─ client.ts              # GraphQL client (graphql-request)
@@ -60,10 +60,11 @@ lib/
 │     ├─ getCategory.ts
 │     ├─ getOriginalVideo.ts
 │     └─ getVideoComments.ts
-
 public/
 ├─ avatar-placeholder.svg    # Fallback avatar image
 
+```md
+> This structure follows Next.js App Router conventions and keeps data fetching colocated with routes for clarity and scalability.
 
 🖥 Pages Overview
 1️⃣ Top Page (/)
