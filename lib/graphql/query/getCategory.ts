@@ -1,13 +1,10 @@
 import { gql } from "graphql-request";
 
-const getHomeScreens = gql`
-  query getHomeScreens {
-    homeScreens {
+const getCategory = gql`
+  query getCategory($id: ID!) {
+    category(id: $id) {
       id
-      category {
-        id
-        name
-      }
+      name
       videos {
         id
         title
@@ -21,4 +18,4 @@ const getHomeScreens = gql`
   }
 `;
 
-export default getHomeScreens;
+export default getCategory;
